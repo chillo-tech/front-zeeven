@@ -13,6 +13,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.app-zeeven.rule=Headers(`X-Host`, `app.zeeven.chillo.fr`)"
       - "traefik.docker.network=applications-network"
+      - "traefik.http.middlewares.serviceheaders.headers.accesscontrolalloworiginlist=*" 
+      - "traefik.http.routers.service.middlewares=serviceheaders"
 
     networks:
       - applications-network
