@@ -30,7 +30,8 @@ export default NextAuth({
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
         try {
-          const res = await fetch(`${backend}/api/connexion`, {
+          const api = process.env.API_URL;
+          const res = await fetch(`http://ms-zeeven:8087/api/connexion`, {
             method: 'POST',
             body: JSON.stringify(credentials),
             headers: { "Content-Type": "application/json" }
