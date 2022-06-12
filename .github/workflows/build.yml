@@ -3,6 +3,7 @@ on:
     branches:
       - authentication
       - init
+      - gestions-evenements
   workflow_dispatch:
 
 env:
