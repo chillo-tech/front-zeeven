@@ -1,8 +1,8 @@
 import React from 'react'
-
+import StepsWizard from './steps/StepsWizard'
 function NewEvent() {
   return (
-    <div>NewEvent</div>
+    <StepsWizard/>
   )
 }
 

@@ -1,9 +1,11 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import  {LogoutOutlined, PlusCircleOutlined} from '@ant-design/icons';
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from '../../../hooks';
+import { NewEventContext } from '../../../context/EventContext';
 function Header() {
   const {userInfos:{firstName}, signOut} = useUser();
+	const {resetEvent} = useContext(NewEventContext);
   let navigate = useNavigate();
   
   const closeSession = async() => {
@@ -12,7 +14,7 @@ function Header() {
   }
 
   const createNewEvent = () => {
-    //resetEvent();
+    resetEvent();
     navigate("/creer-evenement", { replace: true });
   }
 

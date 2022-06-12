@@ -1,10 +1,10 @@
 
 import axios from 'axios';
-
+import { SECURITY_TOKEN } from '../../utils';
 
 const AuthenticatedApiClient = () => {
   const defaultOptions = {
-    baseURL: `/api`,
+    baseURL: `${process.env.REACT_APP_API_URL}api`,
     headers: { 
       "Access-Control-Allow-Origin": "*",
       'Content-Type': 'application/json',
@@ -14,13 +14,9 @@ const AuthenticatedApiClient = () => {
   const instance = axios.create(defaultOptions);
 
   instance.interceptors.request.use(async (request) => {
-    const data = {}; //await getSession();
-    let token = undefined;
-    if (data && data.token) {
-      token = data.token;
-    }
+    const token = sessionStorage.getItem(SECURITY_TOKEN);
     if (token && request.headers) {
-      request.headers.Authorization = `Bearer ${token.token}`;
+      request.headers.Authorization = `Bearer ${token}`;
     }
     return request;
   });

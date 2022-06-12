@@ -1,5 +1,6 @@
 import React,{useEffect} from 'react';
 import { SecurityContext } from '../context';
+import EventContext from '../context/EventContext';
 import { SECURITY_TOKEN } from '../utils';
 import OpenedStack from './opened/OpenedStack';
 import ProtectedStack from './protected/Index';
@@ -19,7 +20,11 @@ function ApplicationLayout() {
   return (
     <section className='bg-slate-200 min-h-screen'>
       {
-        isAuthenticated ? <ProtectedStack /> : <OpenedStack />
+        isAuthenticated ? 
+            <EventContext>
+             <ProtectedStack />
+            </EventContext> : 
+            <OpenedStack />
       }
     </section>
   )
