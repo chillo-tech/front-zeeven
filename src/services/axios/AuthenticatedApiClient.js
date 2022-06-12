@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const AuthenticatedApiClient = () => {
   const defaultOptions = {
-    baseURL: `${process.env.REACT_APP_API_URL}/api`,
+    baseURL: `/api`,
     headers: { 
       "Access-Control-Allow-Origin": "*",
       'Content-Type': 'application/json',
