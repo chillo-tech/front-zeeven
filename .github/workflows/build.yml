@@ -36,6 +36,7 @@ jobs:
 
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    needs: [build]
     steps:
     - name: List files in build
       run: |
