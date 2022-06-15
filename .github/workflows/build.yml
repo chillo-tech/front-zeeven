@@ -54,7 +54,7 @@ jobs:
           password: ${{ secrets.RECETTE_APPLICATIONS_PASSWPRD }}
           key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
           source: "app-zeeven.chillo.fr"
-          target: "/etc/nginx/sites-enabled"
+          target: "/opt/applications/zeeven"
   
   restart-nginx:
     name: "Restart nginx"
@@ -70,4 +70,4 @@ jobs:
         password: ${{ secrets.RECETTE_APPLICATIONS_PASSWPRD }}
         key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
         script: |
-          docker service nginx restart
+          sudo service nginx restart

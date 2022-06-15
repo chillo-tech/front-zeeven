@@ -36,7 +36,7 @@ function EventDetail() {
             : null 
           }
         </article>
-        <Tabs.Group aria-label="Tabs with icons" style="fullWidth">
+        <Tabs.Group aria-label="Tabs with icons">
           <Tabs.Item title="Invités">
             <Guests />
           </Tabs.Item>

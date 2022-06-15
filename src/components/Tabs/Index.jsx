@@ -7,8 +7,8 @@ import {
 } from 'react';
 import classNames from 'classnames';
 
-import { TabItem, TabProps } from './TabItem';
-import * as nanoid from 'nanoid';
+import { TabItem } from './TabItem';
+//import * as nanoid from 'nanoid';
 
 export const TabStyle = 'default' | 'underline' | 'pills' | 'fullWidth';
 export const TabItemStatus = 'active' | 'notActive';
@@ -88,7 +88,7 @@ export const TabsComponent = ({ children, className, style = 'default', ...rest 
     tabRefs.current[focusedTab]?.focus();
   }, [focusedTab]);
 
-  const id = useMemo(() => nanoid.nanoid(), []);
+  //const id = useMemo(() => nanoid.nanoid(), []);
 
   return (
     <div className="flex flex-col">
