@@ -6,14 +6,17 @@ const AuthenticatedApiClient = () => {
   const defaultOptions = {
     baseURL: `${process.env.REACT_APP_API_URL}api`,
     headers: { 
-      "Access-Control-Allow-Origin": "*",
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials':true
     },
   };
 
   const instance = axios.create(defaultOptions);
 
   instance.interceptors.request.use(async (request) => {
+    console.log('====================================');
+    console.log(request);
+    console.log('====================================');
     const token = sessionStorage.getItem(SECURITY_TOKEN);
     if (token && request.headers) {
       request.headers.Authorization = `Bearer ${token}`;
