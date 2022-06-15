@@ -92,7 +92,7 @@ jobs:
         password: ${{ secrets.RECETTE_APPLICATIONS_PASSWPRD }}
         key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
         script: |
-          sudo cp /opt/applications/zeeven/app-zeeven/app-zeeven.conf /etc/nginx/sites-enabled/
+          sudo cp /opt/applications/zeeven/app-zeeven/app-zeeven.conf /etc/nginx/sites-enabled/app.zeeven.conf
 
   restart:
     runs-on: ubuntu-latest
