@@ -39,9 +39,11 @@ jobs:
       run: |
             ls -al build
 
+  
   copy-configs:
     name: "copy configs"
     runs-on: ubuntu-latest
+    needs: create-folder
     steps:
       - uses: actions/checkout@master
       - 
@@ -53,8 +55,8 @@ jobs:
           username: ${{ secrets.RECETTE_APPLICATIONS_USERNAME }}
           password: ${{ secrets.RECETTE_APPLICATIONS_PASSWPRD }}
           key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
-          source: "app-zeeven.chillo.fr"
-          target: "/opt/applications/zeeven"
+          source: "app-zeeven.conf"
+          target: "/opt/applications/zeeven/app-zeeven"
   
   restart-nginx:
     name: "Restart nginx"
