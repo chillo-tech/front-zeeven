@@ -1,0 +1,22 @@
+server {
+    listen 80;
+    listen [::]:80;
+
+    root /var/www/app-zeeven/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    server_name app-zeeven www.app-zeeven;
+
+    location / {
+            try_files $uri $uri/ =404;
+    }
+
+    location /api {
+      proxy_pass   http://localhost:8087/api;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
