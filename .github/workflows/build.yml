@@ -31,10 +31,6 @@ jobs:
     - name: Build
       run: npm run build
 
-  check-build:
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
     - name: List files in build
       run: |
             ls -al build
