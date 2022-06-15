@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   prerequisites:
+    runs-on: ubuntu-latest
     steps:
     - name: Create folder
       uses: appleboy/ssh-action@master
