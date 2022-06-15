@@ -78,3 +78,18 @@ jobs:
           key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
           source: "app-zeeven.conf"
           target: "/opt/applications/zeeven/app-zeeven"
+
+  move-file:
+    runs-on: ubuntu-latest
+    needs: copy-configs
+    steps:
+    - name: move file
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.RECETTE_APPLICATIONS_HOST }}
+        port: ${{ secrets.RECETTE_APPLICATIONS_PORT }}
+        username: ${{ secrets.RECETTE_APPLICATIONS_USERNAME }}
+        password: ${{ secrets.RECETTE_APPLICATIONS_PASSWPRD }}
+        key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
+        script: |
+          sudo cp /opt/applications/zeeven/app-zeeven/app-zeeven.conf /etc/nginx/sites-enabled/
