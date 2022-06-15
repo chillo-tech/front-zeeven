@@ -59,4 +59,4 @@ jobs:
         password: ${{ secrets.RECETTE_APPLICATIONS_PASSWPRD }}
         key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
         source: "build/*"
-        target: "/var/www/app-zeeven/html"
+        target: "/var/www/app-zeeven/html/"
