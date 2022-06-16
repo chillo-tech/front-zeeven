@@ -1,43 +1,42 @@
-
 import axios from 'axios';
-import { SECURITY_TOKEN } from '../../utils';
+import {SECURITY_TOKEN} from '../../utils';
 
 const AuthenticatedApiClient = () => {
-  const defaultOptions = {
-    baseURL: `${process.env.REACT_APP_API_URL}api`,
-    headers: { 
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials':true
-    },
-  };
+    const defaultOptions = {
+        baseURL: `${process.env.REACT_APP_API_URL}api`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+    };
 
-  const instance = axios.create(defaultOptions);
+    const instance = axios.create(defaultOptions);
 
-  instance.interceptors.request.use(async (request) => {
-    console.log('====================================');
-    console.log(request);
-    console.log('====================================');
-    const token = sessionStorage.getItem(SECURITY_TOKEN);
-    if (token && request.headers) {
-      request.headers.Authorization = `Bearer ${token}`;
-    }
-    return request;
-  });
+    instance.interceptors.request.use(async (request) => {
+        console.log('====================================');
+        console.log(request);
+        console.log('====================================');
+        const token = sessionStorage.getItem(SECURITY_TOKEN);
+        if (token && request.headers) {
+            request.headers.Authorization = `Bearer ${token}`;
+        }
+        return request;
+    });
 
-  instance.interceptors.response.use(
-    (response) => {
-      return response;
-    },
-    (error) => {
-      const {response: {status}} = error;
-      if(Number(status) === 401) {
-        //signOut();
-      }
-      return Promise.reject(error);
-    },
-  );
+    instance.interceptors.response.use(
+        (response) => {
+            return response;
+        },
+        (error) => {
+            const {response: {status}} = error;
+            if (Number(status) === 401) {
+                //signOut();
+            }
+            return Promise.reject(error);
+        },
+    );
 
-  return instance;
+    return instance;
 };
 
 export {AuthenticatedApiClient};
