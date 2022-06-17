@@ -54,12 +54,17 @@ function SignIn() {
 						className="mt-2 w-full bg-blue-500 hover:bg-blue-700 text-white font-light py-2 px-4 rounded-lg shadow-sm">Continuer
 				</button>
 			</form>
-			<div className='flex flex-col'>
-				<span className='block text-center'>Vous n'avez pas encore de compte ?</span>
-				<Link to='/'>
-					<span className='block my-1 text-center text-sky-300'>Inscrivez-vous gratuitement</span>
-				</Link>
-			</div>
+      {
+        /**
+         	<div className='flex flex-col'>
+            <span className='block text-center'>Vous n'avez pas encore de compte ?</span>
+            <Link to='/'>
+              <span className='block my-1 text-center text-sky-300'>Inscrivez-vous gratuitement</span>
+            </Link>
+          </div> 
+         */
+      }
+		
 		</>
 	);
 }

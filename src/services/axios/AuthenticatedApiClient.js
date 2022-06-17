@@ -13,9 +13,6 @@ const AuthenticatedApiClient = () => {
     const instance = axios.create(defaultOptions);
 
     instance.interceptors.request.use(async (request) => {
-        console.log('====================================');
-        console.log(request);
-        console.log('====================================');
         const token = sessionStorage.getItem(SECURITY_TOKEN);
         if (token && request.headers) {
             request.headers.Authorization = `Bearer ${token}`;
