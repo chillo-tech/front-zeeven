@@ -5,8 +5,7 @@ const AuthenticatedApiClient = () => {
     const defaultOptions = {
         baseURL: `${process.env.REACT_APP_API_URL}api`,
         headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Content-Type': 'application/json'
         },
     };
 

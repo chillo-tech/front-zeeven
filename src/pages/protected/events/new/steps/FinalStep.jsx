@@ -33,7 +33,7 @@ function FinalStep() {
         */
 			}
 		},
-		[event,navigate],
+		[event],
 	)
 	const goToHomePage = () => {
     navigate('/', { replace: true });
