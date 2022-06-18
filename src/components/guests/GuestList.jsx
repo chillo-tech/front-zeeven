@@ -3,43 +3,41 @@ import  {DeleteOutlined} from '@ant-design/icons';
 
 function GuestList({guests}) {
   return (
-    <table className="table-auto my-4 border-collapse">
-      <tbody>
-        {
+    <div className='grid gap-4 grid-cols-1'>
+       {
           guests.map(
             (guest, index) => (
-              <tr key={index}>
-                <td className='py-2 border-b border-slate-300 text-center align-middle'>
+              <label key={index} className="border border-slate-300 rounded bg-slate-100 grid grid-row-6 md:grid-cols-12 text-center items-center justify-center">
+                <p className='text-center align-middle py-3'>
                    <input type='checkbox' />
-                </td>
-                <td className='py-2 border-b border-slate-300 text-center capitalize'>
+                </p>
+                <p className='text-center capitalize'>
                   {guest.profile.civility}
-                </td>
-                <td className='py-2 border-b border-slate-300'>
-                  <span className='text-gray-800 capitalize mr-1 font-bold'>
+                </p>
+                <p className='py-1 md:col-span-4 text-blue-800 font-extrabold'>
+                  <span className='capitalize mr-1 font-bold'>
                     {guest.profile.firstName}
                   </span>
-                  <span className='text-gray-800 uppercase font-bold'>
+                  <span className='uppercase font-bold'>
                     {guest.profile.lastName}
                   </span>
-                </td>
-                <td className='py-2 border-b border-slate-300'>
+                </p>
+                <p className='py-1 md:col-span-3'>
                   {guest.profile.email}
-                </td>
-                <td className='py-2 border-b border-slate-300'>
+                </p>
+                <p className='py-1 md:col-span-2'>
                   {guest.profile.phone}
-                </td>
-                <td className='py-2 border-b border-slate-300'>
-                  <button type='button' className='mb-1'> 
+                </p>
+                <p className='py-3'>
+                  <button type='button' className='block w-full py-1'> 
                     <DeleteOutlined className='text-red-600' />
                   </button>
-                </td>
-              </tr>
+                </p>
+              </label>
             )
           )
         }
-      </tbody>
-    </table>
+    </div>
   )
 }
 

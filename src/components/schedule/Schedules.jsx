@@ -39,8 +39,8 @@ function Schedules({dates}) {
         <span className='text-blue-800'>
           Votre programme
         </span>
-        <button type='button' onClick={() => setFormVisible(!formVisible)}>
-          <PlusCircleOutlined className='text-xl text-blue-800'/>
+        <button type='button' className='text-blue-800' onClick={() => setFormVisible(!formVisible)}>
+          {formVisible ? <span>Annuler</span> : (<PlusCircleOutlined className='text-xl text-blue-800'/>)}
         </button>
       </div>
       {formVisible ? <ScheduleEdit dates={dates} handleSubmit={onSubmit} /> : null }

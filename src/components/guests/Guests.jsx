@@ -40,8 +40,8 @@ function Guests() {
         <span className='text-blue-800'>
           Vos invités ({guests.length})
         </span>
-        <button type='button' onClick={() => setFormVisible(!formVisible)}>
-          <UserAddOutlined className='text-2xl text-blue-800'/>
+        <button type='button' className='text-blue-800' onClick={() => setFormVisible(!formVisible)}>
+          {formVisible ? <span>Annuler</span> : (<UserAddOutlined className='text-2xl text-blue-800'/>)}
         </button>
       </div>
       {formVisible ? <GuestEdit handleSubmit={onSubmit} /> : null }

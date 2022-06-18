@@ -34,7 +34,7 @@ function GuestEdit({handleSubmit}) {
 
 	return (
 		 <form onSubmit={handleFormSubmit(onSubmit)}>
-       <div className="grid grid-cols-2 gap-4">        
+       <div className="grid grid-cols-2 gap-4 py-4">        
        <div className="mb-0 text-md">
           <label htmlFor="civility" className="form-label">Civilité</label>
           <div className="mt-1">

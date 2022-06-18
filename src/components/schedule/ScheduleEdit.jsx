@@ -87,13 +87,14 @@ function ScheduleEdit({dates, handleSubmit}) {
         </div>
         <div className="flex justify-between">
           <div className="my-3 text-md flex-auto mr-2">
-            <label htmlFor="start" className="form-label mb-1">De</label>
+            <label htmlFor="start" className="form-label mb-1">A</label>
             <div className="mt-1">
               <input {...register("start")} type="time" min="00:00" max="24:00" className="" id="start" />
             </div>
             <p className='text-red-600'>{errors?.start?.message}</p>
           </div>
-
+          {
+            /**
           <div className="my-3 text-md flex-auto ml-2">
             <label htmlFor="end" className="form-label mb-1">A</label>
             <div className="mt-1">
@@ -101,6 +102,9 @@ function ScheduleEdit({dates, handleSubmit}) {
             </div>
             <p className='text-red-600'>{errors?.end?.message}</p>
           </div>
+
+             */
+          }
         </div>
         <div className="my-3 text-md">
           <label htmlFor="location" className="form-label mb-1">Adresse</label>
