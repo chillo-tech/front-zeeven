@@ -1,16 +1,16 @@
 import {useCallback, useContext, useEffect, useState} from "react";
 import { NewEventContext } from "../../../../../context/EventContext";
 import { useNavigate } from "react-router-dom";
-import {AuthenticatedApiClient} from '../../../../../services';
+import { SecurityContext } from "../../../../../context";
 function FinalStep() {
   const navigate = useNavigate();
+  const {protectedAxios} = useContext(SecurityContext);
 	const {state: {event}} = useContext(NewEventContext);
 	const [displayMessage, setDisplayMessage] = useState(false);
 
 	const saveEvent = useCallback(
 		async () => {
 			let name = '';
-			console.log(event)
 			if (event && event.contacts) {
 				name = `Mariage de ${event?.contacts[0]?.firstName} et ${event.contacts[1].firstName}`;
 			}
@@ -19,11 +19,9 @@ function FinalStep() {
 				...event
 			}
 			try {
-				const apiClient = AuthenticatedApiClient();
-				await apiClient.post('event', JSON.stringify(eventToSave));
+				await protectedAxios.post('event', JSON.stringify(eventToSave));
 				setDisplayMessage(true);
 			} catch (error) {
-        console.log({error})
         /*
         const {response: {status}} = error;
         if(Number(status) === 404) {

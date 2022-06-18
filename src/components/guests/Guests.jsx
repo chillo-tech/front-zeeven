@@ -1,29 +1,31 @@
-import React, {useEffect, useState, useCallback} from 'react'
+import React, {useEffect, useState, useCallback, useContext} from 'react'
 import  {UserAddOutlined} from '@ant-design/icons';
 import GuestEdit from './GuestEdit';
-import {AuthenticatedApiClient} from '../../services';
 import GuestList from './GuestList';
 import { useParams } from "react-router-dom";
+import { SecurityContext } from '../../context';
 
 function Guests() {
+  const {protectedAxios} = useContext(SecurityContext);
   const {slug} = useParams();
   const [guests, setGuests] = useState([]);
   const [formVisible, setFormVisible] = useState(false);
   
   const fetchGuests = useCallback(async () => {
     try {
-      const apiClient = AuthenticatedApiClient();
-      const {data} = await apiClient.get(`event/${slug}/guest`);
+      const id = slug.substring(slug.lastIndexOf('-') +1)
+      const {data} = await protectedAxios.get(`event/${id}/guest`);
       setGuests(data);
     } catch (error) {
     }
-  }, [slug])
+  }, [slug,protectedAxios])
 
   const onSubmit = async (profile) => {
     setFormVisible(false);
     try {
-      const apiClient = AuthenticatedApiClient();
-      await apiClient.post(`event/${slug}/guest`, JSON.stringify(profile));
+
+      const id = slug.substring(slug.lastIndexOf('-') +1)
+      await protectedAxios.post(`event/${id}/guest`, JSON.stringify(profile));
       fetchGuests();
     } catch (error) {
     }

@@ -1,29 +1,30 @@
-import React, {useEffect, useState, useCallback} from 'react'
+import React, {useContext, useEffect, useState, useCallback} from 'react'
 import  {PlusCircleOutlined} from '@ant-design/icons';
-import {AuthenticatedApiClient} from '../../services';
 import ScheduleList from './ScheduleList';
 import ScheduleEdit from './ScheduleEdit';
 import { useParams } from "react-router-dom";
+import { SecurityContext } from '../../context';
 
 function Schedules({dates}) {
+  const {protectedAxios} = useContext(SecurityContext);
   const {slug} = useParams();
   const [schedules, setSchedules] = useState([]);
   const [formVisible, setFormVisible] = useState(false);
   
   const fetchSchedules = useCallback(async () => {
     try {
-      const apiClient = AuthenticatedApiClient();
-      const {data} = await apiClient.get(`event/${slug}/schedule`);
+      const id = slug.substring(slug.lastIndexOf('-') +1)
+      const {data} = await protectedAxios.get(`event/${id}/schedule`);
       setSchedules(data);
     } catch (error) {
     }
-  }, [slug])
+  }, [slug, protectedAxios])
 
   const onSubmit = async (profile) => {
     setFormVisible(false);
     try {
-      const apiClient = AuthenticatedApiClient();
-      await apiClient.post(`event/${slug}/schedule`, JSON.stringify(profile));
+      const id = slug.substring(slug.lastIndexOf('-') +1)
+      await protectedAxios.post(`event/${id}/schedule`, JSON.stringify(profile));
       fetchSchedules();
     } catch (error) {
     }

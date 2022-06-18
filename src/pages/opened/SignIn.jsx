@@ -2,10 +2,7 @@ import React, {useContext} from 'react'
 import {useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { Link } from "react-router-dom";
-import {AuthenticatedApiClient} from '../../services';
-import {SecurityContext} from '../../context';
-import { SECURITY_TOKEN } from '../../utils';
+import {ApplicationContext, SecurityContext} from '../../context';
 
 const schema = yup.object({
 	username: yup.string().email("Email invalide").required("Ce champ est requis"),
@@ -13,16 +10,15 @@ const schema = yup.object({
 }).required();
 
 function SignIn() {
-  const {signIn} = useContext(SecurityContext)
+  const {signIn} = useContext(ApplicationContext);
+  const {publicAxios} = useContext(SecurityContext);
   const {register, handleSubmit, formState: {errors}} = useForm({
 		resolver: yupResolver(schema)
 	});
 
 	const onSubmit = async(credentials) => {
     try {
-      const apiClient = AuthenticatedApiClient();
-      const {data} = await apiClient.post('connexion', credentials);
-      sessionStorage.setItem(SECURITY_TOKEN, data.token);
+      const {data} = await publicAxios.post('connexion', credentials);
       signIn(data);
     } catch (error) {
     }

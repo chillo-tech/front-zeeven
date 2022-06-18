@@ -37,4 +37,4 @@ function EventContext({children}) {
     </NewEventContext.Provider>
   )
 }
-export default EventContext;
+export {EventContext};

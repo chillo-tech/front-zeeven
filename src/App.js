@@ -1,16 +1,18 @@
 import React from 'react';
-import SecurityContextProvider from './context';
+import {ApplicationContextProvider, SecurityContextProvider} from './context';
 import ApplicationLayout from './layouts';
 
 import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
-     <SecurityContextProvider>
-      <BrowserRouter>
-       <ApplicationLayout />
-      </BrowserRouter>
-     </SecurityContextProvider>
+     <ApplicationContextProvider>
+        <SecurityContextProvider>
+          <BrowserRouter>
+            <ApplicationLayout />
+          </BrowserRouter>
+        </SecurityContextProvider>
+     </ApplicationContextProvider>
   );
 }
 

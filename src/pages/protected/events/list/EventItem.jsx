@@ -6,7 +6,7 @@ import DateDisplay from '../../../../components/date-display/DateDisplay';
 function EventItem({event}) {
   const navigate = useNavigate();
   const display = () => {
-    navigate(`/evenements/${event.id}`, { replace: true });
+    navigate(`/evenements/${event.slug}`, { replace: true });
   }
   
   return (

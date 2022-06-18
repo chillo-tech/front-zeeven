@@ -1,14 +1,14 @@
-import React, {useEffect, useState, useCallback} from 'react'
-import {AuthenticatedApiClient} from '../../../../services'
+import React, {useEffect,useContext, useState, useCallback} from 'react'
+import { SecurityContext } from '../../../../context';
 import EventItem from './EventItem';
 
 function EventList() {
+  const {protectedAxios} = useContext(SecurityContext);
   const [events, setEvents] = useState([]);
   const readData = useCallback(
     async () => {
       try {
-        const apiClient = AuthenticatedApiClient();
-        const {data} = await apiClient.get('event');
+        const {data} = await protectedAxios.get('event');
         setEvents(data);
       } catch (error) {
       }
@@ -23,7 +23,7 @@ function EventList() {
           Vos evènements
         </h2>
         <div className="">
-          {events.map(event => <EventItem key={event.id} event={event} />)}
+          {events.map((event) => <EventItem key={event.publicId} event={event} />)}
         
         </div>
     </section>

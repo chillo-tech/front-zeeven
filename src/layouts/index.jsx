@@ -1,12 +1,11 @@
 import React,{useEffect} from 'react';
-import { SecurityContext } from '../context';
-import EventContext from '../context/EventContext';
+import { ApplicationContext,EventContext } from '../context';
 import { SECURITY_TOKEN } from '../utils';
 import OpenedStack from './opened/OpenedStack';
 import ProtectedStack from './protected/Index';
 
 function ApplicationLayout() {
-  const {state: {isAuthenticated}, signIn, signOut} = React.useContext(SecurityContext);
+  const {state: {isAuthenticated}, signIn, signOut} = React.useContext(ApplicationContext);
   useEffect(() => {
       const token = sessionStorage.getItem(SECURITY_TOKEN);
       if(token) {

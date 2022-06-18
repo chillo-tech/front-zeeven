@@ -1,24 +1,31 @@
-import {useCallback, useEffect,useState} from 'react'
-import {AuthenticatedApiClient} from '../../../../services';
+import {useContext, useCallback, useEffect,useState} from 'react'
 import DateDisplay from '../../../../components/date-display/DateDisplay';
 import {Tabs} from '../../../../components/Tabs/Index';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Guests from '../../../../components/guests/Guests';
 import Schedules from '../../../../components/schedule/Schedules';
+import { SecurityContext } from '../../../../context';
 function EventDetail() {
 
+  const {protectedAxios} = useContext(SecurityContext);
   const {slug} = useParams();
+  const navigate = useNavigate();
   const [event, setEvent] = useState({dates:[]});
   const readData = useCallback(
     async () => {
       try {
-        const apiClient = AuthenticatedApiClient();
-        const {data} = await apiClient.get(`event/${slug}`);
+        const id = slug.substring(slug.lastIndexOf('-') +1)
+        const {data} = await protectedAxios.get(`event/${id}`);
         setEvent(data);
       } catch (error) {
+        if (error.response) {
+          if (error.response.status === 404) {
+            navigate(`/page-inconnue`, { replace: true });
+          }
+        }
       }
     },
-  [slug])
+  [slug, protectedAxios])
   useEffect(() => {
     readData();
   }, [readData])

@@ -1,9 +1,9 @@
 import { useEffect, useState,useContext } from 'react';
-import { SecurityContext } from '../../context';
+import { ApplicationContext } from '../../context';
 
 export function useUser() {
 
-  const {state: {user}, signOut} = useContext(SecurityContext);
+  const {state: {user}, signOut} = useContext(ApplicationContext);
   const [userInfos, setUserInfos] = useState({firstName:  ''});
 
   useEffect(() => {
