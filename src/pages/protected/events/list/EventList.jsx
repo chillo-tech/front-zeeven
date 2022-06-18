@@ -23,7 +23,7 @@ function EventList() {
           Vos evènements
         </h2>
         <div className="">
-          {events.map((event) => <EventItem key={event.publicId} event={event} />)}
+          {events.map((event) => <EventItem key={event.slug} event={event} />)}
         
         </div>
     </section>

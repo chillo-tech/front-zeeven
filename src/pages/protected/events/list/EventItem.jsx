@@ -6,7 +6,7 @@ import DateDisplay from '../../../../components/date-display/DateDisplay';
 function EventItem({event}) {
   const navigate = useNavigate();
   const display = () => {
-    navigate(`/evenements/${event.slug}`, { replace: true });
+    navigate(`/evenements/${event.publicId}`, { replace: true });
   }
   
   return (
@@ -16,7 +16,7 @@ function EventItem({event}) {
        
         {
           event.dates ? 
-          <div className="flex flex-col md:flex-row mt-3 mr-1">{event.dates.map((date, index) => <span className='mr-1'><DateDisplay entry={date} key={index} /></span>)} </div>
+          <div className="flex flex-col md:flex-row mt-3 mr-1">{event.dates.map((date, index) => <span key={date} className='mr-1'><DateDisplay entry={date}/></span>)} </div>
             : null
           }
         
