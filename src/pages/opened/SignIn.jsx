@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext,useState} from 'react'
 import {useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -10,6 +10,7 @@ const schema = yup.object({
 }).required();
 
 function SignIn() {
+  const [error, setError] = useState(false)
   const {signIn} = useContext(ApplicationContext);
   const {publicAxios} = useContext(SecurityContext);
   const {register, handleSubmit, formState: {errors}} = useForm({
@@ -21,6 +22,11 @@ function SignIn() {
       const {data} = await publicAxios.post('connexion', credentials);
       signIn(data);
     } catch (error) {
+      if (error.response) {
+        if (error.response.status === 401) {
+          setError(true);
+        }
+      }
     }
 	};
 
@@ -28,10 +34,12 @@ function SignIn() {
 		<>
 			<form className="my-5" onSubmit={handleSubmit(onSubmit)}>
 				<h1 className='text-center font-nunito text-4xl mb-2 text-sky-300'>Connectez vous</h1>
-				<div className="mb-3">
-					<label htmlFor="username" className="form-label">Saisissez votre username</label>
+        {error ? <p className='text-red-600 text-center'>Votre email ou votre mot de passe est invalide</p> : null }
+      	<div className="mb-3">
+					<label htmlFor="username" className="form-label">Saisissez votre mail</label>
 					<div className="mt-1">
 						<input {...register("username")} type="text"
+                  onChange={() => setError(false)}
 							   className="text-black	form-control w-full border border-white rounded-lg shadow-sm"
 							   id="username" autoComplete='username'/>
 					</div>
@@ -41,6 +49,7 @@ function SignIn() {
 					<label htmlFor="password" className="form-label">Mot de passe</label>
 					<div className="mt-1">
 						<input {...register("password")} type="password"
+                  onChange={() => setError(false)}
 							   className="text-black	form-control w-full border border-white rounded-lg shadow-sm"
 							   id="password" autoComplete='current-password'/>
 					</div>
