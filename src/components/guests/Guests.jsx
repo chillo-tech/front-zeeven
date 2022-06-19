@@ -31,6 +31,22 @@ function Guests() {
     }
   };
 
+  const handleDelete = async ({id:guestId}) => {
+    setFormVisible(false);
+    try {
+      const id = slug.substring(slug.lastIndexOf('-') +1)
+      await protectedAxios.delete(`event/${id}/guest/${guestId}`);
+      fetchGuests();
+    } catch (error) {
+    }
+  };
+  const sendInvitations = async (ids) => {
+      try {
+        const id = slug.substring(slug.lastIndexOf('-') +1);
+        await protectedAxios.post(`event/${id}/invitations`, ids);
+      } catch (error) {
+      }
+  }
   useEffect(()=>{
     fetchGuests();
   }, [fetchGuests])
@@ -45,7 +61,7 @@ function Guests() {
         </button>
       </div>
       {formVisible ? <GuestEdit handleSubmit={onSubmit} /> : null }
-      {guests.length ? <GuestList guests={guests} /> : null }
+      {guests.length ? <GuestList guests={guests} handleDelete={handleDelete} sendGuestsInvitations={sendInvitations}/> : null }
     </article>
   )
 }

@@ -30,6 +30,16 @@ function Schedules({dates}) {
     }
   };
 
+  const handleDelete = async ({id:scheduleId}) => {
+    setFormVisible(false);
+    try {
+      const id = slug.substring(slug.lastIndexOf('-') +1)
+      await protectedAxios.delete(`event/${id}/schedule/${scheduleId}`);
+      fetchSchedules();
+    } catch (error) {
+    }
+  };
+
   useEffect(()=>{
     fetchSchedules();
   }, [fetchSchedules])
@@ -44,7 +54,7 @@ function Schedules({dates}) {
         </button>
       </div>
       {formVisible ? <ScheduleEdit dates={dates} handleSubmit={onSubmit} /> : null }
-      {schedules.length ? <ScheduleList schedules={schedules} dates={dates} /> : null }
+      {schedules.length ? <ScheduleList schedules={schedules} dates={dates} handleDelete={handleDelete}/> : null }
     </article>
   )
 }
