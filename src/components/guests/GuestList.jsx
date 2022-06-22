@@ -39,7 +39,12 @@ function GuestList({guests, handleDelete, sendGuestsInvitations}) {
                 className="border border-slate-300 rounded bg-slate-100 grid grid-row-6 md:grid-cols-12 text-center items-center justify-center"
               >
                 <p className='text-center align-middle py-3'>
-                   <input type='checkbox' id={guest.profile.publicId} />
+                   <input 
+                    type='checkbox' 
+                    id={guest.profile.publicId} 
+                    value={guest.profile.publicId} 
+                    checked={selectedGuests.indexOf(guest.profile.publicId) > -1}
+                  />
                 </p>
                 <p className='text-center capitalize'>
                   {guest.profile.civility === 'MR' ? 'Mr' : null}
