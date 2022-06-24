@@ -18,7 +18,8 @@ const schema = yup.object({
             .required("Ce champ est requis"),
         phone: yup.string()
             .required("Ce champ est requis")
-            .min(9, "Téléphone invalide"),
+            .min(9, "Téléphone invalide")
+            .max(9, "Téléphone invalide"),
     }),
     sendInvitation: yup.bool()
 }).required();
@@ -296,7 +297,7 @@ function GuestEdit({handleSubmit}) {
                     <div className="md:col-span-2">
                         <label htmlFor="phone" className="form-label">Téléphone</label>
                         <div className="mt-1">
-                            <input {...register("profile.phone")} type="text"
+                            <input {...register("profile.phone")} type="tel"
                                    className="border-2 border-gray-300 after:text-black	form-control w-full text-black rounded-lg shadow-sm"
                                    id="phone"/>
                         </div>
