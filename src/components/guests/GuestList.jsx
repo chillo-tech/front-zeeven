@@ -63,7 +63,7 @@ function GuestList({guests, handleDelete, sendGuestsInvitations}) {
                   {guest.profile.email}
                 </p>
                 <p className='md:col-span-2'>
-                  {guest.profile.phone}
+                  ({guest.profile.phoneIndex}) {guest.profile.phone}
                 </p>
                 <button
                   type='button' 
